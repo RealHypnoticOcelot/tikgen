@@ -1,5 +1,5 @@
 # TikGen
-###### Designed to be used with [VidSplitter](https://github.com/RealHypnoticOcelot/vidsplitter
+###### Designed to be used with [VidSplitter](https://github.com/RealHypnoticOcelot/vidsplitter)
 
 
 ## How to use:
