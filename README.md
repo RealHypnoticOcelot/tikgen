@@ -3,7 +3,7 @@
 
 
 ## How to use:
-Install the same dependencies used with VidSplitter with the following command:
+Install the same dependencies required with the following command:
 
 ```python
 pip3 install -r requirements.txt
