@@ -3,10 +3,11 @@
 
 
 ## How to use:
-Install the same dependencies required with the following command:
+Install the dependencies required with the following commands:
 
 ```python
-pip3 install -r requirements.txt
+pip3 install moviepy
+pip3 install imagemagick
 ```
 
 Drag your equally-spaced videos into the same folder as the .py file. If you used VidSplitter, they should be named 1.mp4, 2.mp4, etc..
