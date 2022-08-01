@@ -20,3 +20,8 @@ Answer the prompts it gives you, and the script will output your Tik-Ready files
 
 
 ###### If you have any issues, questions or concerns, DM me on discord: HypnoticOcelot#6969 or create an issue
+
+
+to do:
+- close files to make them more efficient
+- when folder is selected, move code around so that it randomly selects a file from that folder for every clip in the loop
