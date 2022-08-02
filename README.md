@@ -6,9 +6,11 @@
 Install the dependencies required with the following commands:
 
 ```python
-pip3 install moviepy
-brew install imagemagick
+pip3 install -r requirements.txt
 ```
+
+And install imagemagick at [imagemagick.org](https://imagemagick.org/script/download.php).
+If you're on MacOS and have brew installed, you can just run `brew install imagemagick`.
 
 Drag your equally-spaced videos into the same folder as the .py file. If you used VidSplitter, they should be named 1.mp4, 2.mp4, etc..
 The program relies on this naming system, so please do not change it.
@@ -20,8 +22,3 @@ Answer the prompts it gives you, and the script will output your Tik-Ready files
 
 
 ###### If you have any issues, questions or concerns, DM me on discord: HypnoticOcelot#6969 or create an issue
-
-
-to do:
-- close files to make them more efficient
-- when folder is selected, move code around so that it randomly selects a file from that folder for every clip in the loop
