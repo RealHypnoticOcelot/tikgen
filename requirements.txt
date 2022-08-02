@@ -1,0 +1,2 @@
+importlib_metadata==4.12.0
+moviepy==2.0.0.dev2
