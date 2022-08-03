@@ -1,3 +1,4 @@
+from multiprocessing.sharedctypes import Value
 import os, random
 from moviepy.editor import *
 
@@ -73,6 +74,22 @@ if volx == "Y" or "y":
 else:
     per = 1
 
+loopable = input("Would you like to make the main video loopable? y/n: ")
+if loopable == "Y" or loopable == "y":
+    loopamt = input("How many seconds of loop time? Recommended 0.5: ")
+    try:
+        float(loopamt)
+    except ValueError:
+        print("Invalid input! Disabling loop...")
+        loopable = "n"
+    else:
+        if float(loopamt) <= 0:
+            print("Invalid input! Disabling loop...")
+            loopable = "n"
+else:
+    print("Not looping video!")
+    loopable = "n"
+
 print(f"\nProcessing {amtfiles} files!\n")
 for x in newfiles:
     x = x + ".mp4"
@@ -97,7 +114,8 @@ for x in newfiles:
     textclip = textclip.set_position('center').set_duration(durationsecs) 
     fullclip = CompositeVideoClip([fullclip, textclip])
     fullclip = fullclip.volumex(per)
-    fullclip = vfx.make_loopable(fullclip, 0.5)
+    if loopable != "n":
+        fullclip = vfx.make_loopable(fullclip, float(loopamt))
     fullclip.write_videofile(f"final{xstr}", codec="libx264", audio_codec="aac")
 
 # if not916 != "n" or not916 != "N":
