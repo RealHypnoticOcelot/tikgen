@@ -20,5 +20,14 @@ python3 tikgen.py
 ```
 Answer the prompts it gives you, and the script will output your Tik-Ready files in the same directory!
 
+## Current Feature List:
+
+
+- Add subtext to the videos
+
+- Select a folder of videos for the background
+
+- Make the videos loopable, with configurable loop speeds
+
 
 ###### If you have any issues, questions or concerns, DM me on discord: HypnoticOcelot#6969 or create an issue
