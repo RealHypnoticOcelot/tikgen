@@ -90,6 +90,13 @@ else:
     print("Not looping video!")
     loopable = "n"
 
+
+addsubtext = input("Add subtext to the videos? y/n: ")
+if addsubtext.lower() == "y":
+    subtextstr = input("What will the subtext be?: ")
+else:
+    addsubtext = "n"
+
 print(f"\nProcessing {amtfiles} files!\n")
 for x in newfiles:
     x = x + ".mp4"
@@ -116,6 +123,10 @@ for x in newfiles:
     fullclip = fullclip.volumex(per)
     if loopable != "n":
         fullclip = vfx.make_loopable(fullclip, float(loopamt))
+    if addsubtext != "n":
+        subtext = TextClip(subtextstr, font="fjalla-one.ttf",fontsize=75, color="white", stroke_color="black", stroke_width=3)
+        subtext = subtext.set_position(("center", 600)).set_duration(durationsecs) 
+        fullclip = CompositeVideoClip([fullclip, subtext])
     fullclip.write_videofile(f"final{xstr}", codec="libx264", audio_codec="aac")
 
 # if not916 != "n" or not916 != "N":
