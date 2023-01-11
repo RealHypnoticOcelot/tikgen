@@ -1,5 +1,5 @@
-# TikGen
-###### Designed to be used with [VidSplitter](https://github.com/RealHypnoticOcelot/vidsplitter)
+# VidSplitter/TikGen
+###### Generate TikTok-Ready videos easily!
 
 
 ## How to use:
@@ -30,4 +30,4 @@ Answer the prompts it gives you, and the script will output your Tik-Ready files
 - Make the videos loopable, with configurable loop speeds
 
 
-###### If you have any issues, questions or concerns, DM me on discord: HypnoticOcelot#6969 or create an issue
+###### If you have any issues, questions, concerns or suggestions, DM me on discord: HypnoticOcelot#6969 or create an issue
