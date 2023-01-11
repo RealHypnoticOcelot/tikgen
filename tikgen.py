@@ -6,6 +6,9 @@ import configparser
 config = configparser.ConfigParser()
 
 if not os.path.exists("config.ini"):
+    config['DEFAULT'] = {
+        'appVersion':'1.0'
+    }
     config['VidSplitter'] = {
         'clipLength':'30s',
         'outputPath':f'{Path.cwd()}'
@@ -82,6 +85,7 @@ def selectFile(file):
 
 def vidsplitter():
     print(" __     ___     _ ____        _ _ _   _            \n \ \   / (_) __| / ___| _ __ | (_) |_| |_ ___ _ __ \n  \ \ / /| |/ _` \___ \| '_ \| | | __| __/ _ \ '__|\n   \ V / | | (_| |___) | |_) | | | |_| ||  __/ |   \n    \_/  |_|\__,_|____/| .__/|_|_|\__|\__\___|_|   \n                       |_|                         ")
+    print(f"Vidsplitter v{config['Default']['appVersion']}")
 
     if os.path.exists("config.ini"):
         useConfigQuery = input("Use configuration? y/n, or enter \"print\" to print configuration: ").lower()
@@ -179,6 +183,7 @@ def vidsplitter():
         
 
 print("  _____ _ _     ____            \n |_   _(_) | __/ ___| ___ _ __  \n   | | | | |/ / |  _ / _ \ '_ \ \n   | | | |   <| |_| |  __/ | | |\n   |_| |_|_|\_\\____|\___|_| |_|\n")
+print(f"TikGen v{config['Default']['appVersion']}")
 
 if input("Use Vidsplitter? y/n: ").lower() == "y":
     for i in range (30):
@@ -207,6 +212,7 @@ def optional(inputText):
 def tikgen():
 
     print("  _____ _ _     ____            \n |_   _(_) | __/ ___| ___ _ __  \n   | | | | |/ / |  _ / _ \ '_ \ \n   | | | |   <| |_| |  __/ | | |\n   |_| |_|_|\_\\____|\___|_| |_|\n")
+    print(f"TikGen v{config['Default']['appVersion']}")
     
     if os.path.exists("config.ini"):
         useConfigQuery = input("Use configuration? y/n, or enter \"print\" to print configuration: ").lower()
