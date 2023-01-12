@@ -6,8 +6,8 @@ import configparser
 config = configparser.ConfigParser()
 
 if not os.path.exists("config.ini"):
-    config['DEFAULT'] = {
-        'appVersion':'1.0'
+    config['Default'] = {
+        'appVersion':'1.1'
     }
     config['VidSplitter'] = {
         'clipLength':'30s',
@@ -113,9 +113,9 @@ def vidsplitter():
 
     while not fullVideo.endswith(".mp4"): # if it's like an mkv or something
         if input("Video is not mp4! Re-encode? y/n: ").lower() == "y":
-            newfile = input('Filename of converted video?: ')
-            VideoFileClip(fullVideo).write_videofile(f"{newfile}.mp4", codec="libx264",audio_codec="aac")
-            fullVideo = newfile + ".mp4"
+            newfile = Path(Path.cwd()).joinpath(input('Filename of converted video?: ') + ".mp4")
+            VideoFileClip(fullVideo).write_videofile(f"{newfile}", codec="libx264",audio_codec="aac")
+            fullVideo = newfile
         else:
             print("Cannot continue! Exiting...")
             quit()
@@ -180,6 +180,7 @@ def vidsplitter():
         config['VidSplitter']['clipLength'] = clipLength
         config['VidSplitter']['outputPath'] = outputPath
         print("Complete!")
+    quit()
         
 
 print("  _____ _ _     ____            \n |_   _(_) | __/ ___| ___ _ __  \n   | | | | |/ / |  _ / _ \ '_ \ \n   | | | |   <| |_| |  __/ | | |\n   |_| |_|_|\_\\____|\___|_| |_|\n")
@@ -287,8 +288,14 @@ def tikgen():
             partText = False
 
     if useConfig == True:
-        subText = config["TikGen"]["subText"]
-        print(f"Skipping subtext selection! Set to \"{subText}\"")
+        if input("Use config for subtext? y/n: ").lower() == "y":
+            subText = config["TikGen"]["subText"]
+            print(f"Skipping subtext selection! Set to \"{subText}\"")
+        else:
+            if input("Add subtext to the video? y/n: ").lower() == "y":
+                subText = input("What subtext should be used?: ")
+            else:
+                subText = ""
     else:
         if input("Add subtext to the video? y/n: ").lower() == "y":
             subText = input("What subtext should be used?: ")
@@ -400,12 +407,12 @@ def tikgen():
             if bgVideo.size != [720, 1280]:
                 bgVideo = bgVideo.resize(720, 1280)
             
-            finalVideo = CompositeVideoClip([bgVideo.set_position((0,0)).set_end(mainVideo.duration), mainVideo.set_position((0,20)).volumex(float(volumeMultiplier))], size=(720, 1280))
+            finalVideo = CompositeVideoClip([bgVideo.set_position((0,0)).set_end(mainVideo.duration), mainVideo.set_position((0,50)).volumex(float(volumeMultiplier))], size=(720, 1280))
             if partText == True:
                 partTextClip = TextClip(f"Part {partNumber}", font=fontFile, fontsize=125, color=fontColor, stroke_color=strokeColor, stroke_width=5).set_position("center").set_duration(mainVideo.duration)
                 finalVideo = CompositeVideoClip([finalVideo, partTextClip])
             if subText != "":
-                subTextClip = TextClip(subText, font=fontFile, fontsize=75, color=fontColor, stroke_color=strokeColor, stroke_width=3).set_position(("center", 650)).set_duration(mainVideo.duration)
+                subTextClip = TextClip(subText, font=fontFile, fontsize=75, color=fontColor, stroke_color=strokeColor, stroke_width=3).set_position(("center", 725)).set_duration(mainVideo.duration)
                 finalVideo = CompositeVideoClip([finalVideo, subTextClip])
             finalVideo = vfx.make_loopable(finalVideo, float(loopTime))
 
@@ -426,17 +433,31 @@ def tikgen():
         if bgVideo.size != [720, 1280]:
             bgVideo = bgVideo.resize(720, 1280)
 
-        finalVideo = CompositeVideoClip([bgVideo.set_position((0,0)).set_end(mainVideo.duration), mainVideo.set_position((0,20)).volumex(float(volumeMultiplier))], size=(720, 1280))
+        finalVideo = CompositeVideoClip([bgVideo.set_position((0,0)).set_end(mainVideo.duration), mainVideo.set_position((0,50)).volumex(float(volumeMultiplier))], size=(720, 1280))
         if partText == True:
             partTextClip = TextClip(f"Part {partNumber}", font=fontFile, fontsize=125, color=fontColor, stroke_color=strokeColor, stroke_width=5).set_position("center").set_duration(mainVideo.duration)
             finalVideo = CompositeVideoClip([finalVideo, partTextClip])
         if subText != "":
-            subTextClip = TextClip(subText, font=fontFile, fontsize=75, color=fontColor, stroke_color=strokeColor, stroke_width=3).set_position(("center", 650)).set_duration(mainVideo.duration)
+            subTextClip = TextClip(subText, font=fontFile, fontsize=75, color=fontColor, stroke_color=strokeColor, stroke_width=3).set_position(("center", 725)).set_duration(mainVideo.duration)
             finalVideo = CompositeVideoClip([finalVideo, subTextClip])
         finalVideo = vfx.make_loopable(finalVideo, float(loopTime))
 
         filename = str(Path(outputPath).joinpath(f"final_{str(partNumber)}.mp4"))
         finalVideo.write_videofile(filename, codec="libx264", audio_codec="aac")
-        
+
+    if input("Complete! Would you like to save your settings? y/n: ").lower() == "y":
+        config['TikGen']['batch'] = batch
+        config['TikGen']['volumeMultiplier'] = volumeMultiplier
+        config['TikGen']['loopTime'] = loopTime
+        config['TikGen']['partText'] = partText
+        config['TikGen']['subText'] = subText
+        config['TikGen']['fontFile'] = fontFile
+        config['TikGen']['fontColor'] = fontColor
+        config['TikGen']['strokeColor'] = strokeColor
+        config['TikGen']['outputPath'] = outputPath
+        config['TikGen']['partNumber'] = partNumber
+        print("Complete!")
+    quit()
+
 
 tikgen()
