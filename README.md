@@ -30,4 +30,4 @@ Answer the prompts it gives you, and the script will output your Tik-Ready files
 - Make the videos loopable, with configurable loop speeds
 
 
-###### If you have any issues, questions, concerns or suggestions, DM me on discord: HypnoticOcelot#6969 or create an issue
+###### If you have any issues, questions, concerns or suggestions, [DM me](<https://discord.com/users/404053132910395393>) or create an issue
